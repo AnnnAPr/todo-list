@@ -7,7 +7,7 @@ function TodoList({todoList}) {
       <ul>
         {
           todoList.map((todo) => (
-            TodoListItem({todo})
+            <TodoListItem key={todo.id} todo={todo} />
           ))
         }
       </ul>
