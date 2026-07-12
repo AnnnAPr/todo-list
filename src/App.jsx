@@ -13,9 +13,8 @@ function App() {
   }
 
   const completeTodo = (id) => {
-    todoList.map((todo) => todo.id === id ? {...todo, isCompleted: true} : todo);
-    // setTodoList(previous => previous.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted} : todo));
-    setTodoList(todoList);
+    const updatedList = todoList.map((todo) => todo.id === id ? {...todo, isCompleted: true} : todo);
+    setTodoList(updatedList);
   }
 
   return (
