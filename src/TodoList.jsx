@@ -4,6 +4,8 @@ function TodoList({todoList}) {
 
   return (
     <>
+    {
+      todoList.length === 0 ? <p>Add todo above to get started</p> :
       <ul>
         {
           todoList.map((todo) => (
@@ -11,6 +13,14 @@ function TodoList({todoList}) {
           ))
         }
       </ul>
+    }
+      {/* <ul>
+        {
+          todoList.map((todo) => (
+            <TodoListItem key={todo.id} todo={todo} />
+          ))
+        }
+      </ul> */}
     </>
   );
 }
