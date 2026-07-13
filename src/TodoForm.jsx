@@ -20,7 +20,6 @@ function TodoForm({ onAddTodo }) {
         id="todoTitle"
         name="todoTitle"
         placeholder={'Todo text'}
-        required
         value = {workingTodoTitle}
         onChange={(event) => setWorkingTodoTitle(event.target.value)}
       />
