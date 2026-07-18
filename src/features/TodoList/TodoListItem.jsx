@@ -49,9 +49,9 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
               type="button" 
               disabled={!isValidTodoTitle(workingTitle)}
               onClick={handleUpdate}
-              >
-                Update
-              </button>
+            >
+              Update
+            </button>
           </>
         ) : (
             <>
