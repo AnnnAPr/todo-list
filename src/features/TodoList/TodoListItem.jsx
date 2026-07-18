@@ -21,10 +21,9 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
   //   setWorkingTitle(todo.title);
   // }
 
-  // const handleEdit = (event) => {
-  //   event.preventDefault();
-  //   setWorkingTitle(event.target.value);
-  // }
+  const handleEdit = (event) => {
+    updateTitle(event.target.value);
+  };
 
   const handleUpdate = (event) => {
     if (!isEditing) return;
@@ -42,7 +41,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
               elementId={`editTodo${todo.id}`}
               labelText="Edit Todo"
               value={workingTitle}
-              onChange={(event) => updateTitle(event.target.value)}
+              onChange={handleEdit}
             />
             <button type="button" onClick={cancelEdit}>Cancel</button>
             <button 
