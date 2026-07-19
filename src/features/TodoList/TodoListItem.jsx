@@ -15,13 +15,13 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
   const handleUpdate = (event) => {
     if (!isEditing) return;
     event.preventDefault();
-    const finalTitle = finishEdit();
-    onUpdateTodo({ ...todo, title: finalTitle });
+    onUpdateTodo({ ...todo, title: workingTitle });
+    finishEdit();
   };
 
   return (
     <li>
-      <form onSubmit={(event) => handleUpdate(event.target.value)}>
+      <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
             <TextInputWithLabel
@@ -31,11 +31,11 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
               onChange={(event) => updateTitle(event.target.value)}
             />
             <button type="button" onClick={cancelEdit}>Cancel</button>
-            <button
-              type="button"
-              disabled={!isValidTodoTitle(workingTitle)}
-              onClick={(event) => handleUpdate(event.target.value)}
-            >
+              <button
+                type="button"
+                disabled={!isValidTodoTitle(workingTitle)}
+                onClick={handleUpdate}
+              >
               Update
             </button>
           </>
