@@ -31,11 +31,11 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
               onChange={(event) => updateTitle(event.target.value)}
             />
             <button type="button" onClick={cancelEdit}>Cancel</button>
-              <button
-                type="button"
-                disabled={!isValidTodoTitle(workingTitle)}
-                onClick={handleUpdate}
-              >
+            <button
+              type="button"
+              disabled={!isValidTodoTitle(workingTitle)}
+              onClick={handleUpdate}
+            >
               Update
             </button>
           </>
