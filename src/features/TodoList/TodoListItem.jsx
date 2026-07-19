@@ -21,7 +21,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
 
   return (
     <li>
-      <form onSubmit={handleUpdate}>
+      <form onSubmit={(event) => handleUpdate(event.target.value)}>
         {isEditing ? (
           <>
             <TextInputWithLabel
@@ -34,7 +34,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
             <button
               type="button"
               disabled={!isValidTodoTitle(workingTitle)}
-              onClick={() => handleUpdate()}
+              onClick={(event) => handleUpdate(event.target.value)}
             >
               Update
             </button>
