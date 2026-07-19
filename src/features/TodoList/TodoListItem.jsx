@@ -34,6 +34,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
             <button
               type="button"
               disabled={!isValidTodoTitle(workingTitle)}
+              onClick={() => handleUpdate()}
             >
               Update
             </button>
