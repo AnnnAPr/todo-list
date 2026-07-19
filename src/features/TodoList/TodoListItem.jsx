@@ -13,6 +13,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
   } = useEditableTitle(todo.title);
 
   const handleUpdate = (event) => {
+    if (!isEditing) return;
     event.preventDefault();
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle });
@@ -31,7 +32,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
             />
             <button type="button" onClick={cancelEdit}>Cancel</button>
             <button
-              type="submit"
+              type="button"
               disabled={!isValidTodoTitle(workingTitle)}
             >
               Update
