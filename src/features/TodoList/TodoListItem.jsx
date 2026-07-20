@@ -15,8 +15,8 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
   const handleUpdate = (event) => {
     if (!isEditing) return;
     event.preventDefault();
-    onUpdateTodo({ ...todo, title: workingTitle });
-    finishEdit();
+    const finalTitle = finishEdit();
+    onUpdateTodo({ ...todo, title: finalTitle });
   };
 
   return (
