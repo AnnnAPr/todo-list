@@ -20,7 +20,7 @@ function TodosPage({ token }) {
       });
         if (response.ok) {
           const data = await response.json();
-          setTodoList(data.tasks);
+          setTodoList(data.tasks || []);
         } else if (response.status === 401) {
           throw 'unauthorized';
         } else {
@@ -37,11 +37,6 @@ function TodosPage({ token }) {
       fetchTodos();
     }
   }, [token]);
-
-  // const addTodo = (todoTitle) => {
-  //   let newTodo = { id: Date.now(), title: todoTitle, isCompleted: false };
-  //   setTodoList(previous  => [newTodo, ...previous]);
-  // }
 
   const addTodo = async(todoTitle) => {
     let newTodo = { id: Date.now(), title: todoTitle, isCompleted: false };
@@ -61,17 +56,12 @@ function TodosPage({ token }) {
         throw new Error('Failed to add todo');
       }
       const data = await response.json();
-      setTodoList(previous  => previous.map(todo => todo.id === newTodo.id ? data.task : todo));
+      setTodoList(previous  => previous.map(todo => todo.id === newTodo.id ? (data.task || todo) : todo));
     } catch (error) {
       setTodoList(previous  => previous.filter(todo => todo.id !== newTodo.id ));
       setError(error.message);
     }
   }
-
-  // const completeTodo = (id) => {
-  //   const updatedList = todoList.map((todo) => todo.id === id ? {...todo, isCompleted: true} : todo);
-  //   setTodoList(updatedList);
-  // }
 
   const completeTodo = async (id) => {
     const originalTodo = todoList.find(todo => todo.id === id);
@@ -94,11 +84,6 @@ function TodosPage({ token }) {
       setError(error.message);
     }
   }
-
-  // const updateTodo = (editedTodo) => {
-  //   const updatedTodos = todoList.map((todo) => todo.id === editedTodo.id ? {...todo, title: editedTodo.title} : todo);
-  //   setTodoList(updatedTodos);
-  // }
 
   const updateTodo = async(editedTodo) => {
     const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
@@ -125,6 +110,21 @@ function TodosPage({ token }) {
   return (
     <div>
       <h1>My Todos</h1>
+      {error && 
+        <>
+          <p>
+          {error}
+          </p>
+          <button onClick={() => setError('')}>
+            Clear
+          </button> 
+        </>
+      }
+      {isTodoListLoading && 
+        <p>
+          Loading...
+        </p>
+      }
       <TodoForm onAddTodo={addTodo} />
       <TodoList todoList={todoList} onCompleteTodo={completeTodo} onUpdateTodo={updateTodo}/>
     </div>
