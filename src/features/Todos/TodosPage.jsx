@@ -7,21 +7,27 @@ function TodosPage({ token }) {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
 
   useEffect(() => {
 
-    const fetchTodos = async() => {
+   const fetchTodos = async() => {
+      setError('');
+      setIsTodoListLoading(true);
       try {
-        setIsTodoListLoading(true);
         const response = await fetch('/api/tasks', 
-        { headers: 
-          { 'X-CSRF-TOKEN': token },
-        credentials: 'include' 
-      });
+        { 
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+          },
+          credentials: 'include' 
+        });
         if (response.ok) {
           const data = await response.json();
           setTodoList(data.tasks || []);
         } else if (response.status === 401) {
+          setIsUnauthorized(true);
           throw 'unauthorized';
         } else {
           throw new Error('Failed to fetch todos');
@@ -33,12 +39,13 @@ function TodosPage({ token }) {
       }
     }
 
-    if (token) {
-      fetchTodos();
-    }
+      if (token) {
+        fetchTodos();
+      }
   }, [token]);
 
-  const addTodo = async(todoTitle) => {
+   const addTodo = async(todoTitle) => {
+    setError('');
     let newTodo = { id: Date.now(), title: todoTitle, isCompleted: false };
     setTodoList(previous  => [newTodo, ...previous]);
 
@@ -63,8 +70,9 @@ function TodosPage({ token }) {
     }
   }
 
-  const completeTodo = async (id) => {
-    const originalTodo = todoList.find(todo => todo.id === id);
+   const completeTodo = async (id) => {
+     setError('');
+     const originalTodo = todoList.find(todo => todo.id === id);
     setTodoList(prev => prev.map(todo => todo.id === id ? { ...todo, isCompleted: true } : todo));
     try {
       const response = await fetch(`/api/tasks/${id}`, {
@@ -85,8 +93,9 @@ function TodosPage({ token }) {
     }
   }
 
-  const updateTodo = async(editedTodo) => {
-    const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
+   const updateTodo = async(editedTodo) => {
+     setError('');
+     const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
     setTodoList(prev => prev.map(todo => todo.id === editedTodo.id ? { ...todo, title: editedTodo.title } : todo));
     try {
       const response = await fetch(`/api/tasks/${editedTodo.id}`, {
@@ -113,10 +122,10 @@ function TodosPage({ token }) {
       {error && 
         <>
           <p>
-          {error}
+            {error}
           </p>
           <button onClick={() => setError('')}>
-            Clear
+            Clear Error
           </button> 
         </>
       }

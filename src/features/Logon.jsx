@@ -7,10 +7,10 @@ function Logon({ onSetEmail, onSetToken }) {
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoggingOn(true);
     try {
-      setIsLoggingOn(true);
       const response = await fetch('/api/users/logon', {
         method: 'POST',
         headers: {
