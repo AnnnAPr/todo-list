@@ -7,7 +7,6 @@ function TodosPage({ token }) {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-  const [isUnauthorized, setIsUnauthorized] = useState(false);
 
   useEffect(() => {
 
@@ -27,7 +26,6 @@ function TodosPage({ token }) {
           const data = await response.json();
           setTodoList(data.tasks || []);
         } else if (response.status === 401) {
-          setIsUnauthorized(true);
           throw 'unauthorized';
         } else {
           throw new Error('Failed to fetch todos');
