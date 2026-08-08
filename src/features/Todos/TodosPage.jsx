@@ -45,7 +45,7 @@ function TodosPage({ token }) {
           setTodoList(data.tasks || []);
           setFilterError('');
         } else if (response.status === 401) {
-          throw 'unauthorized';
+          throw new Error('unauthorized');
         } else {
           throw new Error('Failed to fetch todos');
         }
