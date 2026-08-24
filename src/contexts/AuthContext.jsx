@@ -6,7 +6,6 @@ const AuthContext = createContext();
 // Custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
-	console.log('Auth context:', context); //
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -56,6 +55,7 @@ export function AuthProvider({ children }) {
     if (!token) {
         setEmail('');
         setToken('');
+				return { success: true };
     }
     try {
       const res = await fetch('/api/users/logoff', {
@@ -67,10 +67,9 @@ export function AuthProvider({ children }) {
         credentials: 'include',
       });
 
-      setEmail('');
-      setToken('');
-
       if (res.ok) {
+				setEmail('');
+				setToken('');
         return { success: true };
       } else {
         const data = await res.json().catch(() => ({}));
@@ -80,8 +79,8 @@ export function AuthProvider({ children }) {
         };
       }
     } catch (error) {
-      setEmail('');
-      setToken('');
+      // setEmail('');
+      // setToken('');
       return {
         success: false,
         error: 'Network error during logout',

@@ -60,7 +60,7 @@ function TodosPage() {
           throw new Error('Failed to fetch todos');
         }
       } catch (error) {
-        if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
+        if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'asc') {
           
           dispatch({ 
             type: TODO_ACTIONS.FETCH_FILTER_ERROR, 
@@ -131,6 +131,11 @@ function TodosPage() {
       if (!response.ok) {
         throw new Error('Failed to complete todo');
       }
+      const data = await response.json();
+      dispatch({
+        type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
+        payload: data.task
+      })  
       invalidateCache();
     } catch (error) {
       dispatch({
@@ -157,6 +162,11 @@ function TodosPage() {
       if (!response.ok) {
         throw new Error('Failed to update todo');
       }
+      const data = await response.json();
+      dispatch({
+        type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
+        payload: data.task
+      })
       invalidateCache();
     } catch (error) {
       dispatch({

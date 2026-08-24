@@ -35,9 +35,9 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
+  isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -154,11 +154,13 @@ export function todoReducer(state, action) {
         ...state,
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
+        filterError: '',
       };
     case TODO_ACTIONS.SET_FILTER:
       return {
         ...state,
         filterTerm: action.payload,
+        filterError: '',
       };
     case TODO_ACTIONS.CLEAR_ERROR:
       return {
@@ -175,7 +177,7 @@ export function todoReducer(state, action) {
         ...state,
         filterTerm: '',
         sortBy: 'createdAt',
-        sortDirection: 'desc',
+        sortDirection: 'asc',
         filterError: '',
       };
 
