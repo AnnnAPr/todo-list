@@ -26,12 +26,12 @@ export function AuthProvider({ children }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail, password }),
         credentials: 'include',
-    };
+    	};
     
-    const res = await fetch('/api/users/logon', options);
-    const data = await res.json();
+    	const res = await fetch('/api/users/logon', options);
+    	const data = await res.json();
     
-    if (res.status === 200 && data.name && data.csrfToken) {
+    	if (res.status === 200 && data.name && data.csrfToken) {
       // Success: Update state
       setEmail(data.name);
       setToken(data.csrfToken);
@@ -44,12 +44,12 @@ export function AuthProvider({ children }) {
       };
     }
   } catch (error) {
-    return {
-      success: false,
-      error: 'Network error during login',
-    };
+			return {
+				success: false,
+				error: 'Network error during login',
+			};
+  	}
   }
-  };
 
   const logout = async () => {
     if (!token) {
@@ -73,14 +73,16 @@ export function AuthProvider({ children }) {
         return { success: true };
       } else {
         const data = await res.json().catch(() => ({}));
+				setEmail('');
+				setToken('');
         return {
           success: false,
           error: data?.message || 'Logout failed',
         };
       }
     } catch (error) {
-      // setEmail('');
-      // setToken('');
+      setEmail('');
+      setToken('');
       return {
         success: false,
         error: 'Network error during logout',

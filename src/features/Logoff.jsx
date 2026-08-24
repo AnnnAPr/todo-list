@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 function Logoff() {
-  const { email, logout } = useAuth();
+  const { logout } = useAuth();
   const [authError, setAuthError] = useState('');
   const [isLoggingOff, setIsLoggingOff] = useState(false);
 
