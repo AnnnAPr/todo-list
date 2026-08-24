@@ -88,7 +88,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
       return {
         ...state,
-        // todoList: [action.payload, ...state.todoList],
         todoList: state.todoList.map(todo =>
           todo.id === action.payload.todoId ? (action.payload.task || todo) : todo),
         error: '',
@@ -97,7 +96,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.ADD_TODO_ERROR:
       return {
         ...state,
-        // todoList: state.todoList.filter(todo => todo.id !== action.payload.todoId),
         todoList: state.todoList.filter(todo => todo.id !== action.payload.todoId),
         error: action.payload.message,
       };
