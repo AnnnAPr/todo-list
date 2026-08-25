@@ -85,11 +85,12 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
+      const taskFromBackend = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todoId
-            ? action.payload.task || todo
+            ? (taskFromBackend || todo)
             : todo,
         ),
         error: "",
@@ -114,21 +115,23 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
+      const completedTask = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.id ? action.payload : todo,
+          completedTask && todo.id === completedTask.id ? completedTask : todo,
         ),
         error: "",
         filterError: "",
       };
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
+      const completedOriginalTask = action.payload?.originalTodo;
       return {
         ...state,
-        todoList: action.payload.originalTodo
+        todoList: completedOriginalTask
           ? state.todoList.map((todo) =>
-              todo.id === action.payload.originalTodo.id
-                ? action.payload.originalTodo
+              todo.id === completedOriginalTask.id
+                ? completedOriginalTask
                 : todo,
             )
           : state.todoList,
@@ -147,22 +150,22 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
+      const updatedTask = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.id ? action.payload : todo,
+          updatedTask && todo.id === updatedTask.id ? updatedTask : todo,
         ),
         error: "",
         filterError: "",
       };
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
+      const originalTodo = action.payload?.originalTodo;
       return {
         ...state,
-        todoList: action.payload.originalTodo
+        todoList: originalTodo
           ? state.todoList.map((todo) =>
-              todo.id === action.payload.originalTodo.id
-                ? action.payload.originalTodo
-                : todo,
+              todo.id === originalTodo.id ? originalTodo : todo,
             )
           : state.todoList,
         error: action.payload.message,

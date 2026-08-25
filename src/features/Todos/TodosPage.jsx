@@ -102,9 +102,10 @@ function TodosPage() {
         throw new Error("Failed to add todo");
       }
       const data = await response.json();
+      const createdTask = data?.task || data;
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
-        payload: { task: data.task, todoId: newTodo.id },
+        payload: { task: createdTask, todoId: newTodo.id },
       });
       invalidateCache();
     } catch (error) {
