@@ -55,7 +55,9 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
-        todoList: action.payload,
+        todoList: Array.isArray(action.payload)
+          ? action.payload
+          : action.payload?.tasks || [],
         isTodoListLoading: false,
         error: "",
         filterError: "",

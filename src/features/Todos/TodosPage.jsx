@@ -50,9 +50,10 @@ function TodosPage() {
         });
         if (response.ok) {
           const data = await response.json();
+          const tasks = Array.isArray(data) ? data : (data.tasks || []);
           dispatch({
             type: TODO_ACTIONS.FETCH_SUCCESS,
-            payload: data.tasks || [],
+            payload: tasks,
           });
         } else if (response.status === 401) {
           throw new Error("unauthorized");
@@ -60,16 +61,10 @@ function TodosPage() {
           throw new Error("Failed to fetch todos");
         }
       } catch (error) {
-        if (
-          debouncedFilterTerm ||
-          sortBy !== "createdAt" ||
-          sortDirection !== "asc"
-        ) {
+        if (debouncedFilterTerm || sortBy !== "createdAt" || sortDirection !== "asc") {
           dispatch({
             type: TODO_ACTIONS.FETCH_FILTER_ERROR,
-            payload: {
-              message: `Error filtering/sorting todos: ${error.message}`,
-            },
+            payload: { message: error.message },
           });
         } else {
           dispatch({
