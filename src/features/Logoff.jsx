@@ -11,8 +11,10 @@ function Logoff() {
     setAuthError('');
     try {
       const result = await logout();
-      if (result?.error) {
-        setAuthError(result.error || 'Logout failed');
+      if (result?.success) {
+        setAuthError('');
+      } else if (result?.error) {
+        setAuthError(result.error);
       }
     } catch (error) {
       setAuthError('An unexpected error occurred during logout');

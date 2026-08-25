@@ -116,8 +116,8 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
       return {
         ...state,
-        todoList: state.todoList.map(todo =>
-          todo.id === action.payload.originalTodo.id ? action.payload.originalTodo : todo),
+        todoList: action.payload.originalTodo ? state.todoList.map(todo =>
+          todo.id === action.payload.originalTodo.id ? action.payload.originalTodo : todo) : state.todoList,
         error: action.payload.message,
       };
 
@@ -140,8 +140,8 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
       return {
         ...state,
-        todoList: state.todoList.map(todo =>
-          todo.id === action.payload.originalTodo.id ? action.payload.originalTodo : todo),
+        todoList: action.payload.originalTodo ? state.todoList.map(todo =>
+          todo.id === action.payload.originalTodo.id ? action.payload.originalTodo : todo) : state.todoList,
         error: action.payload.message,
       };
 

@@ -16,8 +16,12 @@ function Logon() {
     setAuthError('');
     try {
       const result = await login(email, password);
-        if (result?.error) {
-          setAuthError(result.error || 'Error logging on');
+        if (result?.success) {
+          setAuthError('');
+          setEmail('');
+          setPassword('');
+        } else if (result?.error) {
+          setAuthError(result.error);
         }
     } catch (error) {
         setAuthError(`Error: ${error.name} | ${error.message}`);
