@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 // Create the context
 const AuthContext = createContext();
@@ -7,89 +7,89 @@ const AuthContext = createContext();
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
 
 export function AuthProvider({ children }) {
   // State for authentication
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState('');
-  
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
+
   // Functions will go here...
 
   const login = async (userEmail, password) => {
     try {
       const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: userEmail, password }),
-        credentials: 'include',
-    	};
-    
-    	const res = await fetch('/api/users/logon', options);
-    	const data = await res.json();
-    
-    	if (res.status === 200 && data.name && data.csrfToken) {
-      // Success: Update state
-      setEmail(data.name);
-      setToken(data.csrfToken);
-      return { success: true };
-    } else {
-      // Failure: Return error
-      return {
-        success: false,
-        error: `Authentication failed: ${data?.message}`,
+        credentials: "include",
       };
-    }
-  } catch (error) {
-			return {
-				success: false,
-				error: 'Network error during login',
-			};
-  	}
-  }
 
-  const logout = async () => {
-    if (!token) {
-        setEmail('');
-        setToken('');
-				return { success: true };
-    }
-    try {
-      const res = await fetch('/api/users/logoff', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': token,
-        },
-        credentials: 'include',
-      });
+      const res = await fetch("/api/users/logon", options);
+      const data = await res.json();
 
-      if (res.ok) {
-				setEmail('');
-				setToken('');
+      if (res.status === 200 && data.name && data.csrfToken) {
+        // Success: Update state
+        setEmail(data.name);
+        setToken(data.csrfToken);
         return { success: true };
       } else {
-        const data = await res.json().catch(() => ({}));
-				setEmail('');
-				setToken('');
+        // Failure: Return error
         return {
           success: false,
-          error: data?.message || 'Logout failed',
+          error: `Authentication failed: ${data?.message}`,
         };
       }
     } catch (error) {
-      setEmail('');
-      setToken('');
       return {
         success: false,
-        error: 'Network error during logout',
+        error: "Network error during login",
       };
     }
-  };    
-  
+  };
+
+  const logout = async () => {
+    if (!token) {
+      setEmail("");
+      setToken("");
+      return { success: true };
+    }
+    try {
+      const res = await fetch("/api/users/logoff", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        setEmail("");
+        setToken("");
+        return { success: true };
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setEmail("");
+        setToken("");
+        return {
+          success: false,
+          error: data?.message || "Logout failed",
+        };
+      }
+    } catch (error) {
+      setEmail("");
+      setToken("");
+      return {
+        success: false,
+        error: "Network error during logout",
+      };
+    }
+  };
+
   // Context value object
   const value = {
     email,
@@ -98,10 +98,6 @@ export function AuthProvider({ children }) {
     login,
     logout,
   };
-  
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

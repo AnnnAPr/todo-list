@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 function Logoff() {
   const { logout } = useAuth();
-  const [authError, setAuthError] = useState('');
+  const [authError, setAuthError] = useState("");
   const [isLoggingOff, setIsLoggingOff] = useState(false);
 
   const handleLogoff = async () => {
     setIsLoggingOff(true);
-    setAuthError('');
+    setAuthError("");
     try {
       const result = await logout();
       if (result?.success) {
-        setAuthError('');
+        setAuthError("");
       } else if (result?.error) {
         setAuthError(result.error);
       }
     } catch (error) {
-      setAuthError('An unexpected error occurred during logout');
+      setAuthError("An unexpected error occurred during logout");
     } finally {
       setIsLoggingOff(false);
     }
@@ -27,7 +27,7 @@ function Logoff() {
     <div>
       {authError && <p>{authError}</p>}
       <button onClick={handleLogoff} disabled={isLoggingOff}>
-        {isLoggingOff ? 'Logging off...' : `Logout`}
+        {isLoggingOff ? "Logging off..." : `Logout`}
       </button>
     </div>
   );
