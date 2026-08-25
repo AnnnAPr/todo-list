@@ -17,8 +17,6 @@ export function AuthProvider({ children }) {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
 
-  // Functions will go here...
-
   const login = async (userEmail, password) => {
     try {
       const options = {
