@@ -62,13 +62,15 @@ export function todoReducer(state, action) {
         error: "",
         filterError: "",
       };
-    case TODO_ACTIONS.FETCH_ERROR:
+    case TODO_ACTIONS.FETCH_ERROR: {
+      const { message, isFilterError } = action.payload;
       return {
         ...state,
         isTodoListLoading: false,
-        error: `Error fetching todos: ${action.payload.message}`,
-        filterError: "",
+        error: isFilterError ? "" : message,
+        filterError: isFilterError ? message : "",
       };
+    }
     case TODO_ACTIONS.FETCH_FILTER_ERROR:
       return {
         ...state,
@@ -85,7 +87,7 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
-      const taskFromBackend = action.payload?.task || action.payload;
+      { const taskFromBackend = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
@@ -95,15 +97,16 @@ export function todoReducer(state, action) {
         ),
         error: "",
         filterError: "",
-      };
+      }; }
     case TODO_ACTIONS.ADD_TODO_ERROR:
+      { const { todoId, message } = action.payload;
       return {
         ...state,
         todoList: state.todoList.filter(
-          (todo) => todo.id !== action.payload.todoId,
+          (todo) => todo.id !== todoId,
         ),
-        error: action.payload.message,
-      };
+        error: message,
+      }; }
 
     // Complete todo operations
     case TODO_ACTIONS.COMPLETE_TODO_START:
@@ -115,7 +118,7 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
-      const completedTask = action.payload?.task || action.payload;
+      { const completedTask = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
@@ -123,9 +126,9 @@ export function todoReducer(state, action) {
         ),
         error: "",
         filterError: "",
-      };
+      }; }
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
-      const completedOriginalTask = action.payload?.originalTodo;
+      { const completedOriginalTask = action.payload?.originalTodo;
       return {
         ...state,
         todoList: completedOriginalTask
@@ -136,7 +139,7 @@ export function todoReducer(state, action) {
             )
           : state.todoList,
         error: action.payload.message,
-      };
+      }; }
 
     // Update todo operations
     case TODO_ACTIONS.UPDATE_TODO_START:
@@ -150,7 +153,7 @@ export function todoReducer(state, action) {
         error: "",
       };
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-      const updatedTask = action.payload?.task || action.payload;
+      { const updatedTask = action.payload?.task || action.payload;
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
@@ -158,9 +161,9 @@ export function todoReducer(state, action) {
         ),
         error: "",
         filterError: "",
-      };
+      }; }
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
-      const originalTodo = action.payload?.originalTodo;
+      { const originalTodo = action.payload?.originalTodo;
       return {
         ...state,
         todoList: originalTodo
@@ -169,7 +172,7 @@ export function todoReducer(state, action) {
             )
           : state.todoList,
         error: action.payload.message,
-      };
+      }; }
 
     // UI operations
     case TODO_ACTIONS.SET_SORT:
