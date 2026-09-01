@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 function HomePage() {
   const { isAuthenticated } = useAuth();
@@ -8,9 +8,9 @@ function HomePage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/todos', { replace: true });
+      navigate("/todos", { replace: true });
     } else {
-      navigate('/login', { replace: true });
+      navigate("/login", { replace: true });
     }
   }, [isAuthenticated, navigate]);
 

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
@@ -13,7 +13,7 @@ function LoginPage() {
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
   // Get intended destination from location state, default to /todos
-  const from = location.state?.from?.pathname || '/todos';
+  const from = location.state?.from?.pathname || "/todos";
 
   // Redirect if already authenticated
   useEffect(() => {

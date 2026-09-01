@@ -10,7 +10,7 @@ import {
   TODO_ACTIONS,
 } from "../reducers/todoReducer.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter.jsx";
 
 function TodosPage() {
@@ -18,7 +18,7 @@ function TodosPage() {
   const [searchParams] = useSearchParams();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
 
-  const statusFilter = searchParams.get('status') || 'all';
+  const statusFilter = searchParams.get("status") || "all";
 
   const {
     todoList,
@@ -55,7 +55,7 @@ function TodosPage() {
         });
         if (response.ok) {
           const data = await response.json();
-          const tasks = Array.isArray(data) ? data : (data.tasks || []);
+          const tasks = Array.isArray(data) ? data : data.tasks || [];
           dispatch({
             type: TODO_ACTIONS.FETCH_SUCCESS,
             payload: tasks,
@@ -66,7 +66,11 @@ function TodosPage() {
           throw new Error("Failed to fetch todos");
         }
       } catch (error) {
-        if (debouncedFilterTerm || sortBy !== "createdAt" || sortDirection !== "asc") {
+        if (
+          debouncedFilterTerm ||
+          sortBy !== "createdAt" ||
+          sortDirection !== "asc"
+        ) {
           dispatch({
             type: TODO_ACTIONS.FETCH_FILTER_ERROR,
             payload: { message: error.message },
