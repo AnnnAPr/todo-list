@@ -15,12 +15,13 @@ function ProfilePage() {
         setLoading(true);
         setError("");
 
-        const response = await fetch("/api/tasks", {
-          headers: {
-            "X-CSRF-TOKEN": token,
-          },
-          credentials: "include",
-        });
+        const options = {
+          method: 'GET',
+          headers: { 'X-CSRF-TOKEN': token },
+          credentials: 'include',
+        };
+
+        const response = await fetch("/api/tasks", options);
 
         if (response.status === 401) {
           throw new Error("Unauthorized");
