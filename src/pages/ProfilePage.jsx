@@ -29,7 +29,8 @@ function ProfilePage() {
         if (!response.ok) {
           throw new Error("Failed to fetch todos");
         }
-        const todos = await response.json();
+        const data = await response.json();
+        const todos = Array.isArray(data) ? data : data.tasks || [];
         setStats({
           total: todos.length,
           completed: todos.filter((todo) => todo.isCompleted).length,
@@ -45,6 +46,9 @@ function ProfilePage() {
     fetchStats();
   }, [token]);
 
+  const completionPercentage =
+    stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
+
   return (
     <div>
       <h1>Profile</h1>
@@ -58,11 +62,21 @@ function ProfilePage() {
 
       <section>
         <h2>Todo Statistics</h2>
-        <ul>
+        {loading && <p>Loading statistics...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {!loading && !error && (
+          <ul>
+            <li>Total: {stats.total}</li>
+            <li>Completed: {stats.completed}</li>
+            <li>Active: {stats.active}</li>
+            <li>Completion: {completionPercentage}%</li>
+          </ul>
+        )}
+        {/* <ul>
           <li>Total: {stats.total}</li>
           <li>Completed: {stats.completed}</li>
           <li>Active: {stats.active}</li>
-        </ul>
+        </ul> */}
       </section>
     </div>
   );
