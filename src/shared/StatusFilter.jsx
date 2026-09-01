@@ -1,30 +1,30 @@
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from "react-router";
 
 function StatusFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentStatus = searchParams.get('status') || 'all';
+  const currentStatus = searchParams.get("status") || "all";
 
   const handleStatusChange = (status) => {
-    if (status === 'all') {
+    if (status === "all") {
       // Remove status param for 'all' to keep URL clean
-      searchParams.delete('status');
+      searchParams.delete("status");
     } else {
-      searchParams.set('status', status);
+      searchParams.set("status", status);
     }
     setSearchParams(searchParams);
   };
 
   return (
     <div>
-      <label htmlFor='statusFilter'>Show:</label>
+      <label htmlFor="statusFilter">Show:</label>
       <select
-        id='statusFilter'
+        id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
       >
-        <option value='all'>All Todos</option>
-        <option value='active'>Active Todos</option>
-        <option value='completed'>Completed Todos</option>
+        <option value="all">All Todos</option>
+        <option value="active">Active Todos</option>
+        <option value="completed">Completed Todos</option>
       </select>
     </div>
   );

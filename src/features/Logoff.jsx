@@ -15,7 +15,7 @@ function Logoff() {
       const result = await logout();
       if (result?.success) {
         setAuthError("");
-        navigate('/login');
+        navigate("/login");
       } else {
         setAuthError(result.error);
       }
