@@ -11,7 +11,6 @@ import Header from './shared/Header';
 
 function App() {
 
-  // const { isAuthenticated } = useAuth();
   return (
     <>
       <Header />

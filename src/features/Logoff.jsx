@@ -16,11 +16,10 @@ function Logoff() {
       if (result?.success) {
         setAuthError("");
         navigate('/login');
-      // } else if (result?.error) {
       } else {
         setAuthError(result.error);
       }
-    } catch (error) {
+    } catch {
       setAuthError("An unexpected error occurred during logout");
     } finally {
       setIsLoggingOff(false);

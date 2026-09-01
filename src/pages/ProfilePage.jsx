@@ -43,22 +43,6 @@ function ProfilePage() {
         setLoading(false);
       }
       
-    //   const response = await fetch('/api/tasks', {
-    //     headers: {
-    //       'X-CSRF-TOKEN': token
-    //     },
-    //     credentials: 'include'
-    //   })
-
-      
-    //   const todos = await response.json();
-    //   setStats({
-    //     total: todos.length,
-    //     completed: todos.filter((todo) => todo.isCompleted).length,
-    //     active: todos.filter((todo) => !todo.isCompleted).length
-    //   })
-    // } catch (err) {
-      
     }
     fetchStats();
   }, [token])
