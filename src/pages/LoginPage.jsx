@@ -32,6 +32,7 @@ function LoginPage() {
         setAuthError("");
         setEmail("");
         setPassword("");
+        navigate(from, { replace: true });
       } else if (result?.error) {
         setAuthError(result.error);
       }

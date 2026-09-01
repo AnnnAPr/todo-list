@@ -4,10 +4,15 @@ function NotFoundPage() {
   return (
     <>
       <h1>404 - Page Not Found</h1>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/todos">Todos</Link>
+      <p>The page you're looking for doesn't exist.</p>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/todos">Todos</Link></li>
+        </ul>
+      </nav>
     </>
   );
 }
