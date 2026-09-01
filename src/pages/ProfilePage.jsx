@@ -32,11 +32,13 @@ function ProfilePage() {
         }
         const data = await response.json();
         const todos = Array.isArray(data) ? data : data.tasks || [];
-        setStats({
-          total: todos.length,
-          completed: todos.filter((todo) => todo.isCompleted).length,
-          active: todos.filter((todo) => !todo.isCompleted).length,
-        });
+
+        // Calculate statistics
+        const total = todos.length;
+        const completed = todos.filter((todo) => todo.isCompleted).length;
+        const active = total - completed;
+
+        setStats({ total, completed, active });
       } catch (err) {
         setError(`Error loading statistics: ${err.message}`);
         setLoading(false);
