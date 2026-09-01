@@ -14,7 +14,7 @@ const RequireAuth = ({ children }) => {
   }, [isAuthenticated, navigate, location]);
 
   if (!isAuthenticated) {
-    return <p>Loading...</p>;
+    return <p>Redirecting to login...</p>;
   }
 
   return children;

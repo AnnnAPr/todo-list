@@ -41,7 +41,6 @@ function ProfilePage() {
         setStats({ total, completed, active });
       } catch (err) {
         setError(`Error loading statistics: ${err.message}`);
-        setLoading(false);
       } finally {
         setLoading(false);
       }
@@ -58,9 +57,10 @@ function ProfilePage() {
 
       <section>
         <h2>User Information</h2>
-        <p>
-          <strong>Email: {email}</strong>
-        </p>
+        <ul>
+          <li><strong>Email:</strong> {email}</li>
+          <li><strong>Status:</strong> {token ? "Active" : "Inactive"}</li>
+        </ul>
       </section>
 
       <section>
