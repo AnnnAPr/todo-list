@@ -14,8 +14,12 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [email, setEmail] = useState(() => localStorage.getItem(EMAIL_KEY) || "");
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || "");
+  const [email, setEmail] = useState(
+    () => localStorage.getItem(EMAIL_KEY) || "",
+  );
+  const [token, setToken] = useState(
+    () => localStorage.getItem(TOKEN_KEY) || "",
+  );
 
   useEffect(() => {
     if (token) {

@@ -1,6 +1,6 @@
-import { useLocation, useNavigate } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
-import { useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
+import { useEffect } from "react";
 
 const RequireAuth = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -9,7 +9,7 @@ const RequireAuth = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login', { replace: true, state: { from: location } });
+      navigate("/login", { replace: true, state: { from: location } });
     }
   }, [isAuthenticated, navigate, location]);
 
