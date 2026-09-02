@@ -75,11 +75,6 @@ function ProfilePage() {
             <li>Completion: {completionPercentage}%</li>
           </ul>
         )}
-        {/* <ul>
-          <li>Total: {stats.total}</li>
-          <li>Completed: {stats.completed}</li>
-          <li>Active: {stats.active}</li>
-        </ul> */}
       </section>
     </div>
   );
