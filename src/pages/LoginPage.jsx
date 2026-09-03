@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
-function Logon() {
-  const { login } = useAuth();
+function LoginPage() {
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
+
+  // Get intended destination from location state, default to /todos
+  const from = location.state?.from?.pathname || "/todos";
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, from]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,6 +32,7 @@ function Logon() {
         setAuthError("");
         setEmail("");
         setPassword("");
+        navigate(from, { replace: true });
       } else if (result?.error) {
         setAuthError(result.error);
       }
@@ -57,4 +71,4 @@ function Logon() {
   );
 }
 
-export default Logon;
+export default LoginPage;

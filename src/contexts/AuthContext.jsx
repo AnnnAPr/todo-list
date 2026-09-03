@@ -1,9 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-// Create the context
+const TOKEN_KEY = "csrfToken";
+const EMAIL_KEY = "userEmail";
+
 const AuthContext = createContext();
 
-// Custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
@@ -13,9 +14,28 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  // State for authentication
-  const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
+  const [email, setEmail] = useState(
+    () => localStorage.getItem(EMAIL_KEY) || "",
+  );
+  const [token, setToken] = useState(
+    () => localStorage.getItem(TOKEN_KEY) || "",
+  );
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem(TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem(EMAIL_KEY, email);
+    } else {
+      localStorage.removeItem(EMAIL_KEY);
+    }
+  }, [email]);
 
   const login = async (userEmail, password) => {
     try {
@@ -29,9 +49,9 @@ export function AuthProvider({ children }) {
       const res = await fetch("/api/users/logon", options);
       const data = await res.json();
 
-      if (res.status === 200 && data.name && data.csrfToken) {
+      if (res.status === 200 && data.email && data.csrfToken) {
         // Success: Update state
-        setEmail(data.name);
+        setEmail(data.email);
         setToken(data.csrfToken);
         return { success: true };
       } else {
@@ -41,7 +61,7 @@ export function AuthProvider({ children }) {
           error: `Authentication failed: ${data?.message}`,
         };
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: "Network error during login",
@@ -78,7 +98,7 @@ export function AuthProvider({ children }) {
           error: data?.message || "Logout failed",
         };
       }
-    } catch (error) {
+    } catch {
       setEmail("");
       setToken("");
       return {
