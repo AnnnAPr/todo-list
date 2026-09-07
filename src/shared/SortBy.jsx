@@ -1,9 +1,14 @@
-function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange }) {
+function SortBy({
+  sortBy,
+  sortDirection,
+  onSortByChange,
+  onSortDirectionChange,
+}) {
   return (
     <>
       <label htmlFor="sortBy">Sort by</label>
-      <select 
-        id="sortBy" 
+      <select
+        id="sortBy"
         name="sortBy"
         value={sortBy}
         onChange={(event) => onSortByChange(event.target.value)}
@@ -13,8 +18,8 @@ function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange 
       </select>
 
       <label htmlFor="order">Order</label>
-      <select 
-        id="order" 
+      <select
+        id="order"
         name="order"
         value={sortDirection}
         onChange={(event) => onSortDirectionChange(event.target.value)}
@@ -23,7 +28,7 @@ function SortBy ({ sortBy, sortDirection, onSortByChange, onSortDirectionChange 
         <option value="asc">Ascending</option>
       </select>
     </>
-  )
+  );
 }
 
 export default SortBy;
