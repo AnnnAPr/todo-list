@@ -40,7 +40,6 @@ function Navigation() {
             </NavLink>
           </li>
         )}
-        {isAuthenticated && <li>email: {email}</li>}
       </ul>
     </nav>
   );
