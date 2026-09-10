@@ -19,7 +19,7 @@ function TodoForm({ onAddTodo }) {
     <form onSubmit={handleAddTodo} className="flex items-end gap-3 my-4">
       <TextInputWithLabel 
         elementId="todoTitle"
-        labelText="Todo"
+        labelText="New Todo"
         value={workingTodoTitle}
         onChange={(event) => setWorkingTodoTitle(event.target.value)}
         ref={inputRef}
