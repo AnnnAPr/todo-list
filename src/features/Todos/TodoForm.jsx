@@ -16,15 +16,15 @@ function TodoForm({ onAddTodo }) {
   };
 
   return (
-    <form onSubmit={handleAddTodo}>
+    <form onSubmit={handleAddTodo} className="flex items-end gap-3 my-4">
       <TextInputWithLabel 
         elementId="todoTitle"
-        labelText="Todo"
+        labelText="New Todo"
         value={workingTodoTitle}
         onChange={(event) => setWorkingTodoTitle(event.target.value)}
         ref={inputRef}
       />
-      <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)} >Add Todo</button>
+      <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)} className="px-4 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950/50 disabled:opacity-50 text-white text-sm font-semibold rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed whitespace-nowrap">Add Todo</button>
     </form>
   );
 }

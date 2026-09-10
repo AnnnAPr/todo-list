@@ -14,7 +14,7 @@ import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter.jsx";
 
 function TodosPage() {
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
   const [searchParams] = useSearchParams();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
 
@@ -31,7 +31,7 @@ function TodosPage() {
     dataVersion,
   } = state;
 
-  const debouncedFilterTerm = useDebounce(filterTerm, 300);
+  const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -61,6 +61,7 @@ function TodosPage() {
             payload: tasks,
           });
         } else if (response.status === 401) {
+          await logout();
           throw new Error("unauthorized");
         } else {
           throw new Error("Failed to fetch todos");
@@ -87,7 +88,7 @@ function TodosPage() {
     if (token) {
       fetchTodos();
     }
-  }, [token, sortBy, sortDirection, debouncedFilterTerm, dataVersion]);
+  }, [token, sortBy, sortDirection, debouncedFilterTerm, dataVersion, logout]);
 
   const addTodo = async (todoTitle) => {
     dispatch({ type: TODO_ACTIONS.CLEAR_ERROR });
@@ -116,7 +117,6 @@ function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: { task: createdTask, todoId: newTodo.id },
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
@@ -128,6 +128,7 @@ function TodosPage() {
   const completeTodo = async (id) => {
     dispatch({ type: TODO_ACTIONS.CLEAR_ERROR });
     const originalTodo = todoList.find((todo) => todo.id === id);
+    const nextStatus = !originalTodo?.isCompleted;
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
       payload: id,
@@ -140,7 +141,7 @@ function TodosPage() {
           "X-CSRF-TOKEN": token,
         },
         credentials: "include",
-        body: JSON.stringify({ isCompleted: true }),
+        body: JSON.stringify({ isCompleted: nextStatus }),
       });
       if (!response.ok) {
         throw new Error("Failed to complete todo");
@@ -150,7 +151,6 @@ function TodosPage() {
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
         payload: data.task,
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
@@ -184,7 +184,6 @@ function TodosPage() {
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: data.task,
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
@@ -202,7 +201,18 @@ function TodosPage() {
 
   return (
     <div>
-      <h1>My Todos</h1>
+      <div className="flex items-center gap-3">
+        <h1 className="text-2xl sm:text-3xl font-bold text-purple-300 text-left">
+          My Todos
+        </h1>
+        <span
+          className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-900/60 text-purple-300 border border-purple-700/50 ${
+            isTodoListLoading ? "visible" : "invisible"
+          }`}
+        >
+          Loading...
+        </span>
+      </div>
       {error && (
         <>
           <p>{error}</p>
@@ -226,7 +236,6 @@ function TodosPage() {
           </button>
         </div>
       )}
-      {isTodoListLoading && <p>Loading...</p>}
       <SortBy
         sortBy={sortBy}
         onSortByChange={(value) =>

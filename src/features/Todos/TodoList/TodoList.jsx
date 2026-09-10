@@ -6,7 +6,6 @@ function TodoList({
   onCompleteTodo,
   onUpdateTodo,
   dataVersion,
-  // statusFilter = "active",
   statusFilter = "all",
 }) {
   const filteredTodoList = useMemo(() => {
@@ -43,9 +42,9 @@ function TodoList({
   };
 
   return filteredTodoList.todos.length === 0 ? (
-    <p>{getEmptyMessage()}</p>
+    <p className="text-purple-400 text-sm italic text-center py-4">{getEmptyMessage()}</p>
   ) : (
-    <ul>
+    <ul className="list-none p-0 m-0 space-y-2">
       {filteredTodoList.todos.map((todo) => (
         <TodoListItem
           key={todo.id}

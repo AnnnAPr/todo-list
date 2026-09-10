@@ -7,28 +7,25 @@ function StatusFilter() {
   const handleStatusChange = (status) => {
     const newParams = new URLSearchParams(searchParams);
     if (status === "all") {
-      // Remove status param for 'all' to keep URL clean
-      // searchParams.delete("status");
       newParams.delete("status");
     } else {
-      // searchParams.set("status", status);
       newParams.set("status", status);
     }
-    // setSearchParams(searchParams);
     setSearchParams(newParams);
   };
 
   return (
-    <div>
-      <label htmlFor="statusFilter">Show:</label>
+    <div className="flex items-center gap-2">
+      <label htmlFor="statusFilter" className="text-sm font-medium text-purple-200">Show:</label>
       <select
         id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
+        className="bg-purple-950/70 border border-purple-700/60 text-purple-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
       >
-        <option value="all">All Todos</option>
-        <option value="active">Active Todos</option>
-        <option value="completed">Completed Todos</option>
+        <option value="all" className="bg-purple-950 text-slate-100">All Todos</option>
+        <option value="active" className="bg-purple-950 text-slate-100">Active Todos</option>
+        <option value="completed" className="bg-purple-950 text-slate-100">Completed Todos</option>
       </select>
     </div>
   );
