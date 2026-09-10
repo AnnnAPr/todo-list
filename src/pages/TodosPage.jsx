@@ -31,7 +31,7 @@ function TodosPage() {
     dataVersion,
   } = state;
 
-  const debouncedFilterTerm = useDebounce(filterTerm, 300);
+  const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -117,7 +117,6 @@ function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: { task: createdTask, todoId: newTodo.id },
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
@@ -185,7 +184,6 @@ function TodosPage() {
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: data.task,
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
