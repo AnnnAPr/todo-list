@@ -13,7 +13,7 @@ function Navigation() {
   return (
     <nav>
       <ul
-        style={{ display: "flex", listStyle: "none", gap: "1rem", padding: 0 }}
+        className="flex list-none gap-4 p-0 m-0"
       >
         <li>
           <NavLink to="/about" className={navLinkClass}>

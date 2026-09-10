@@ -59,16 +59,16 @@ function ProfilePage() {
 
       <section className="mb-6">
         <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">User Information</h2>
-        <ul>
-          <li><strong>Email:</strong> {email}</li>
-          <li><strong>Status:</strong> {token ? "Active" : "Inactive"}</li>
+        <ul className="list-none p-0 space-y-1 text-sm text-purple-100">
+          <li><strong className="text-purple-300">Email:</strong> {email}</li>
+          <li><strong className="text-purple-300">Status:</strong> {token ? "Active" : "Inactive"}</li>
         </ul>
       </section>
 
       <section>
         <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">Todo Statistics</h2>
         {loading && <p>Loading statistics...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         {!loading && !error && (
           <ul>
             <li><span className="italic font-semibold">Total:</span> {stats.total}</li>
