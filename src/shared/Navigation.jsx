@@ -6,7 +6,6 @@ const navLinkClass = ({ isActive }) =>
     ? "font-bold underline"
     : "font-normal no-underline";
 
-   
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
