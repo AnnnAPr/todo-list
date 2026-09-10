@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-🔗 [View Live Application](https://deployed-url.com) 
+🔗 [View Live Application](https://taskflow-app-mu-livid.vercel.app) 
 
 ---
 
