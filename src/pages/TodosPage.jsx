@@ -152,7 +152,6 @@ function TodosPage() {
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
         payload: data.task,
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
