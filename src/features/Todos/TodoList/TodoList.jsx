@@ -43,7 +43,7 @@ function TodoList({
   };
 
   return filteredTodoList.todos.length === 0 ? (
-    <p className="text-purple-400 text-sm italic text-center py-4">
+    <p className="text-white text-sm italic text-center py-4">
       {getEmptyMessage()}
     </p>
   ) : (
