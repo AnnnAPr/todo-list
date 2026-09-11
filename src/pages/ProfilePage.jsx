@@ -28,11 +28,16 @@ function ProfilePage() {
           throw new Error("Unauthorized");
         }
 
-        if (!response.ok) {
+        let todos = [];
+
+        if (response.status === 404) {
+          todos = [];
+        } else if (response.ok) {
+          const data = await response.json();
+          todos = Array.isArray(data) ? data : data?.tasks || [];
+        } else {
           throw new Error("Failed to fetch todos");
         }
-        const data = await response.json();
-        const todos = Array.isArray(data) ? data : data.tasks || [];
 
         // Calculate statistics
         const total = todos.length;
@@ -41,7 +46,6 @@ function ProfilePage() {
 
         setStats({ total, completed, active });
       } catch (err) {
-        await logout();
         setError(`Error loading statistics: ${err.message}`);
       } finally {
         setLoading(false);
