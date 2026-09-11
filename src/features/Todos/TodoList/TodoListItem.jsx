@@ -2,7 +2,7 @@ import TextInputWithLabel from '../../../shared/TextInputWithLabel.jsx';
 import { isValidTodoTitle } from '../../../utils/todoValidation.js';
 import { useEditableTitle } from '../../../hooks/useEditableTitle.js';
 
-function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
+function TodoListItem({todo, onCompleteTodo, onUpdateTodo, onDeleteTodo}) {
   const {
     isEditing,
     workingTitle,
@@ -70,6 +70,15 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
             >
               {todo.title}
             </span>
+
+            <button
+              type="button"
+              onClick={() => onDeleteTodo(todo.id)}
+              aria-label="Delete todo"
+              className="p-1 text-slate-200 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition cursor-pointer ml-auto"
+            >
+              Delete
+            </button>
           </div>
         )}
       </form>

@@ -29,6 +29,11 @@ export const TODO_ACTIONS = {
 
   // Cache operation
   INVALIDATE_CACHE: "INVALIDATE_CACHE",
+
+  // Delete todo operations
+  DELETE_TODO_START: "DELETE_TODO_START",
+  DELETE_TODO_SUCCESS: "DELETE_TODO_SUCCESS",
+  DELETE_TODO_ERROR: "DELETE_TODO_ERROR",
 };
 
 export const initialTodoState = {
@@ -209,6 +214,30 @@ export function todoReducer(state, action) {
         error: "",
         filterError: "",
       };
+
+    // Delete todo operations
+    case TODO_ACTIONS.DELETE_TODO_START:
+      return {
+        ...state,
+        todoList: state.todoList.filter((todo) => todo.id !== action.payload),
+        error: "",
+        filterError: "",
+      };
+    case TODO_ACTIONS.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        filterError: "",
+      };
+    case TODO_ACTIONS.DELETE_TODO_ERROR:
+      {
+        const originalTodo = action.payload?.originalTodo;
+        return {
+          ...state,
+          todoList: originalTodo ? [...state.todoList, originalTodo] : state.todoList,
+          error: action.payload.message,
+        };
+      }
 
     // Cache operations
     case TODO_ACTIONS.INVALIDATE_CACHE:

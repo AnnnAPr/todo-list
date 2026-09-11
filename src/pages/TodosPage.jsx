@@ -199,6 +199,29 @@ function TodosPage() {
     dispatch({ type: TODO_ACTIONS.INVALIDATE_CACHE });
   }, []);
 
+  const deleteTodo = async (id) => {
+    dispatch({ type: TODO_ACTIONS.CLEAR_ERROR });
+    dispatch({ type: TODO_ACTIONS.DELETE_TODO_START, payload: id });
+
+    const originalTodo = todoList.find((todo) => todo.id === id);
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete todo");
+      }
+      dispatch({ type: TODO_ACTIONS.DELETE_TODO_SUCCESS, payload: id });
+    } catch (error) {
+      dispatch({ type: TODO_ACTIONS.DELETE_TODO_ERROR, payload: { message: error.message, originalTodo } });
+    }
+  }
+
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -262,6 +285,7 @@ function TodosPage() {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        onDeleteTodo={deleteTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
       />
