@@ -1,15 +1,15 @@
-import TextInputWithLabel from '../../../shared/TextInputWithLabel.jsx';
-import { isValidTodoTitle } from '../../../utils/todoValidation.js';
-import { useEditableTitle } from '../../../hooks/useEditableTitle.js';
+import TextInputWithLabel from "../../../shared/TextInputWithLabel.jsx";
+import { isValidTodoTitle } from "../../../utils/todoValidation.js";
+import { useEditableTitle } from "../../../hooks/useEditableTitle.js";
 
-function TodoListItem({todo, onCompleteTodo, onUpdateTodo, onDeleteTodo}) {
+function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
   const {
     isEditing,
     workingTitle,
     startEditing,
     cancelEdit,
     updateTitle,
-    finishEdit
+    finishEdit,
   } = useEditableTitle(todo.title);
 
   const handleUpdate = (event) => {
@@ -19,7 +19,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo, onDeleteTodo}) {
     onUpdateTodo({ ...todo, title: finalTitle });
   };
 
-    return (
+  return (
     <li className="bg-purple-950/40 border border-purple-800/40 rounded-xl p-3 my-2 shadow-sm">
       <form onSubmit={handleUpdate}>
         {isEditing ? (
@@ -84,7 +84,6 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo, onDeleteTodo}) {
       </form>
     </li>
   );
-
 }
 
 export default TodoListItem;

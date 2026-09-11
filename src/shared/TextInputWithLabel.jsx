@@ -7,7 +7,12 @@ export default function TextInputWithLabel({
 }) {
   return (
     <div className="flex flex-col gap-1.5 flex-1">
-      <label htmlFor={elementId} className="text-sm font-medium text-purple-200">{labelText}</label>
+      <label
+        htmlFor={elementId}
+        className="text-sm font-medium text-purple-200"
+      >
+        {labelText}
+      </label>
       <input
         type="text"
         id={elementId}

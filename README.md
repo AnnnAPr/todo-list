@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-🔗 [View Live Application](https://taskflow-app-mu-livid.vercel.app) 
+🔗 [View Live Application](https://taskflow-app-mu-livid.vercel.app)
 
 ---
 
@@ -31,16 +31,16 @@
 
 ## 🛠️ Technologies Used
 
-| Category         | Technology                              |
-|------------------|-----------------------------------------|
-| Framework        | [React 19](https://react.dev/)          |
-| Build Tool       | [Vite 8](https://vite.dev/)             |
-| Routing          | [React Router 7](https://reactrouter.com/) |
+| Category         | Technology                                  |
+| ---------------- | ------------------------------------------- |
+| Framework        | [React 19](https://react.dev/)              |
+| Build Tool       | [Vite 8](https://vite.dev/)                 |
+| Routing          | [React Router 7](https://reactrouter.com/)  |
 | Styling          | [Tailwind CSS v4](https://tailwindcss.com/) |
-| State Management | React `useReducer` + Context API        |
-| API Proxy        | Vite dev server proxy (`/api` → backend)|
-| Linting          | ESLint with React Hooks plugin          |
-| Language         | JavaScript (ES Modules, JSX)            |
+| State Management | React `useReducer` + Context API            |
+| API Proxy        | Vite dev server proxy (`/api` → backend)    |
+| Linting          | ESLint with React Hooks plugin              |
+| Language         | JavaScript (ES Modules, JSX)                |
 
 ---
 
@@ -48,10 +48,10 @@
 
 ### 🖥️ Desktop View
 
-
 ![Desktop View](./screenshots/desktop.png)
 
 ### 📱 Mobile View
+
 ![Mobile View](./screenshots/mobile.png)
 
 ---
@@ -103,33 +103,39 @@ Make sure you have the following installed:
 
 ## 📜 Available Scripts
 
-| Script          | Command           | Description                                                              |
-|-----------------|-------------------|--------------------------------------------------------------------------|
-| **dev**         | `npm run dev`     | Starts the local development server at `http://localhost:3001` with HMR  |
-| **build**       | `npm run build`   | Bundles the app for production into the `dist/` folder                   |
-| **preview**     | `npm run preview` | Serves the production `dist/` build locally to test before deploying     |
-| **lint**        | `npm run lint`    | Runs ESLint to check for code quality issues                             |
+| Script      | Command           | Description                                                             |
+| ----------- | ----------------- | ----------------------------------------------------------------------- |
+| **dev**     | `npm run dev`     | Starts the local development server at `http://localhost:3001` with HMR |
+| **build**   | `npm run build`   | Bundles the app for production into the `dist/` folder                  |
+| **preview** | `npm run preview` | Serves the production `dist/` build locally to test before deploying    |
+| **lint**    | `npm run lint`    | Runs ESLint to check for code quality issues                            |
 
 ---
 
 ## 🎨 Design Decisions
 
 ### Dark Purple Theme
+
 The app uses dark purple colors with semi-transparent, frosted-glass-style cards — giving it a sleek, modern look.
 
 ### Tailwind CSS v4
+
 Tailwind CSS v4 (with the new Vite plugin) was chosen for its utility-first approach, enabling rapid styling directly in JSX without leaving the component. This keeps styles co-located with the markup they affect, making components easy to read and maintain.
 
 ### `useReducer` for Todo State
+
 Rather than scattered `useState` calls, all todo state — including loading, error, filter, sort, and the list itself — is managed in a single `useReducer`. This makes state transitions explicit, predictable, and easy to trace during debugging.
 
 ### Optimistic UI Updates
+
 When a user adds, completes, or edits a todo, the UI updates immediately before the server responds. If the server call fails, the change is rolled back. This makes the app feel fast and responsive even on slower connections.
 
 ### Debounced Search
+
 The filter/search input uses a custom `useDebounce` hook (300ms delay) to avoid sending an API request on every keystroke, reducing unnecessary network traffic.
 
 ### URL-based Status Filter
+
 The active/completed filter state lives in the URL as a `?status=` query parameter. This means filter state is shareable, bookmarkable, and survives page refreshes — a pattern that feels native to the web.
 
 ---
@@ -184,4 +190,4 @@ SOFTWARE.
 
 ---
 
-*Built with 💜 using React + Vite + Tailwind CSS*
+_Built with 💜 using React + Vite + Tailwind CSS_

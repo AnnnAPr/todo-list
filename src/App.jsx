@@ -15,27 +15,27 @@ function App() {
       <Header />
       <main className="w-full max-w-sm sm:max-w-xl md:max-w-2xl bg-purple-900/40 backdrop-blur-md border border-purple-700/40 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl mt-6">
         <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/todos"
-          element={
-            <RequireAuth>
-              <TodosPage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <RequireAuth>
-              <ProfilePage />
-            </RequireAuth>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/todos"
+            element={
+              <RequireAuth>
+                <TodosPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
     </div>
   );

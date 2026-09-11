@@ -2,18 +2,14 @@ import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 const navLinkClass = ({ isActive }) =>
-  isActive
-    ? "font-bold underline"
-    : "font-normal no-underline";
+  isActive ? "font-bold underline" : "font-normal no-underline";
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
   return (
     <nav>
-      <ul
-        className="flex list-none gap-4 p-0 m-0"
-      >
+      <ul className="flex list-none gap-4 p-0 m-0">
         <li>
           <NavLink to="/about" className={navLinkClass}>
             About

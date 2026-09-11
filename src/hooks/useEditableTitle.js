@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export function useEditableTitle(initialTitle) {
   const [isEditing, setIsEditing] = useState(false);
@@ -29,6 +29,6 @@ export function useEditableTitle(initialTitle) {
     startEditing,
     cancelEdit,
     updateTitle,
-    finishEdit
+    finishEdit,
   };
 }

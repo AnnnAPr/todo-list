@@ -218,9 +218,12 @@ function TodosPage() {
       }
       dispatch({ type: TODO_ACTIONS.DELETE_TODO_SUCCESS, payload: id });
     } catch (error) {
-      dispatch({ type: TODO_ACTIONS.DELETE_TODO_ERROR, payload: { message: error.message, originalTodo } });
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: { message: error.message, originalTodo },
+      });
     }
-  }
+  };
 
   return (
     <div>

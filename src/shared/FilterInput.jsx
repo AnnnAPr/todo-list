@@ -2,7 +2,12 @@ function FilterInput({ filterTerm, onFilterChange }) {
   return (
     <div className="flex items-end gap-3 my-3">
       <div className="flex flex-col gap-1.5 flex-1">
-        <label htmlFor="filterInput" className="text-sm font-medium text-purple-200">Search todos:</label>
+        <label
+          htmlFor="filterInput"
+          className="text-sm font-medium text-purple-200"
+        >
+          Search todos:
+        </label>
         <input
           id="filterInput"
           type="text"
