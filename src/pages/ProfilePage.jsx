@@ -52,7 +52,7 @@ function ProfilePage() {
       }
     };
     fetchStats();
-  }, [token]);
+  }, [token, logout]);
 
   const completionPercentage =
     stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;

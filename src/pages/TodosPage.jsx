@@ -3,13 +3,13 @@ import TodoForm from "../features/Todos/TodoForm.jsx";
 import SortBy from "../shared/SortBy.jsx";
 import FilterInput from "../shared/FilterInput.jsx";
 import useDebounce from "../utils/useDebounce.js";
-import { useState, useReducer, useEffect, useCallback } from "react";
+import { useState, useReducer, useEffect } from "react";
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
 } from "../reducers/todoReducer.js";
-import { useAuth } from "../contexts/AuthContext.jsx";
+import { useAuth } from "../contexts/AuthContext";
 import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter.jsx";
 
@@ -200,10 +200,6 @@ function TodosPage() {
 
   const handleFilterChange = (newFilter) =>
     dispatch({ type: TODO_ACTIONS.SET_FILTER, payload: newFilter });
-
-  const invalidateCache = useCallback(() => {
-    dispatch({ type: TODO_ACTIONS.INVALIDATE_CACHE });
-  }, []);
 
   const deleteTodo = async (id) => {
     dispatch({ type: TODO_ACTIONS.CLEAR_ERROR });
