@@ -1,31 +1,28 @@
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default ({ mode }) => {
-  const env = loadEnv(mode, '.', '');
+  const env = loadEnv(mode, ".", "");
   return defineConfig({
-    plugins: [
-      react(),
-      tailwindcss(),
-    ],
+    plugins: [react(), tailwindcss()],
     server: {
       port: 3001,
       proxy: {
-        '/api': {
+        "/api": {
           target: env.VITE_TARGET,
           secure: false,
           changeOrigin: true,
           configure: (proxy) => {
-            proxy.on('proxyRes', (proxyRes) => {
-              const cookies = proxyRes.headers['set-cookie'];
+            proxy.on("proxyRes", (proxyRes) => {
+              const cookies = proxyRes.headers["set-cookie"];
               if (cookies) {
-                proxyRes.headers['set-cookie'] = cookies.map((cookie) =>
+                proxyRes.headers["set-cookie"] = cookies.map((cookie) =>
                   cookie
-                    .replace(/; *Secure/gi, '')
-                    .replace(/; *SameSite=None/gi, '')
-                    .replace(/; *Domain=[^;]+/gi, '')
+                    .replace(/; *Secure/gi, "")
+                    .replace(/; *SameSite=None/gi, "")
+                    .replace(/; *Domain=[^;]+/gi, ""),
                 );
               }
             });

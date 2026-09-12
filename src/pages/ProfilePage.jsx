@@ -16,9 +16,9 @@ function ProfilePage() {
         setError("");
 
         const options = {
-          method: 'GET',
-          headers: { 'X-CSRF-TOKEN': token },
-          credentials: 'include',
+          method: "GET",
+          headers: { "X-CSRF-TOKEN": token },
+          credentials: "include",
         };
 
         const response = await fetch("/api/tasks?limit=100", options);
@@ -28,11 +28,16 @@ function ProfilePage() {
           throw new Error("Unauthorized");
         }
 
-        if (!response.ok) {
+        let todos = [];
+
+        if (response.status === 404) {
+          todos = [];
+        } else if (response.ok) {
+          const data = await response.json();
+          todos = Array.isArray(data) ? data : data?.tasks || [];
+        } else {
           throw new Error("Failed to fetch todos");
         }
-        const data = await response.json();
-        const todos = Array.isArray(data) ? data : data.tasks || [];
 
         // Calculate statistics
         const total = todos.length;
@@ -41,7 +46,6 @@ function ProfilePage() {
 
         setStats({ total, completed, active });
       } catch (err) {
-        await logout();
         setError(`Error loading statistics: ${err.message}`);
       } finally {
         setLoading(false);
@@ -55,26 +59,48 @@ function ProfilePage() {
 
   return (
     <div>
-      <h1 className="text-3xl sm:text-4xl font-bold text-purple-400 text-left mb-4">Profile</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-purple-400 text-left mb-4">
+        Profile
+      </h1>
 
       <section className="mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">User Information</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">
+          User Information
+        </h2>
         <ul className="list-none p-0 space-y-1 text-sm text-purple-100">
-          <li><strong className="text-purple-300">Email:</strong> {email}</li>
-          <li><strong className="text-purple-300">Status:</strong> {token ? "Active" : "Inactive"}</li>
+          <li>
+            <strong className="text-purple-300">Email:</strong> {email}
+          </li>
+          <li>
+            <strong className="text-purple-300">Status:</strong>{" "}
+            {token ? "Active" : "Inactive"}
+          </li>
         </ul>
       </section>
 
       <section>
-        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">Todo Statistics</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">
+          Todo Statistics
+        </h2>
         {loading && <p>Loading statistics...</p>}
         {error && <p className="text-red-400 text-sm">{error}</p>}
         {!loading && !error && (
           <ul>
-            <li><span className="italic font-semibold">Total:</span> {stats.total}</li>
-            <li><span className="italic font-semibold">Completed:</span> {stats.completed}</li>
-            <li><span className="italic font-semibold">Active:</span> {stats.active}</li>
-            <li><span className="italic font-semibold">Completion:</span> {completionPercentage}%</li>
+            <li>
+              <span className="italic font-semibold">Total:</span> {stats.total}
+            </li>
+            <li>
+              <span className="italic font-semibold">Completed:</span>{" "}
+              {stats.completed}
+            </li>
+            <li>
+              <span className="italic font-semibold">Active:</span>{" "}
+              {stats.active}
+            </li>
+            <li>
+              <span className="italic font-semibold">Completion:</span>{" "}
+              {completionPercentage}%
+            </li>
           </ul>
         )}
       </section>

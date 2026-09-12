@@ -5,6 +5,7 @@ function TodoList({
   todoList,
   onCompleteTodo,
   onUpdateTodo,
+  onDeleteTodo,
   dataVersion,
   statusFilter = "all",
 }) {
@@ -42,7 +43,9 @@ function TodoList({
   };
 
   return filteredTodoList.todos.length === 0 ? (
-    <p className="text-purple-400 text-sm italic text-center py-4">{getEmptyMessage()}</p>
+    <p className="text-white text-sm italic text-center py-4">
+      {getEmptyMessage()}
+    </p>
   ) : (
     <ul className="list-none p-0 m-0 space-y-2">
       {filteredTodoList.todos.map((todo) => (
@@ -51,6 +54,7 @@ function TodoList({
           todo={todo}
           onCompleteTodo={onCompleteTodo}
           onUpdateTodo={onUpdateTodo}
+          onDeleteTodo={onDeleteTodo}
         />
       ))}
     </ul>

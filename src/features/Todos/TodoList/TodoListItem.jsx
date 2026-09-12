@@ -1,15 +1,15 @@
-import TextInputWithLabel from '../../../shared/TextInputWithLabel.jsx';
-import { isValidTodoTitle } from '../../../utils/todoValidation.js';
-import { useEditableTitle } from '../../../hooks/useEditableTitle.js';
+import TextInputWithLabel from "../../../shared/TextInputWithLabel.jsx";
+import { isValidTodoTitle } from "../../../utils/todoValidation.js";
+import { useEditableTitle } from "../../../hooks/useEditableTitle.js";
 
-function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
+function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
   const {
     isEditing,
     workingTitle,
     startEditing,
     cancelEdit,
     updateTitle,
-    finishEdit
+    finishEdit,
   } = useEditableTitle(todo.title);
 
   const handleUpdate = (event) => {
@@ -19,7 +19,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
     onUpdateTodo({ ...todo, title: finalTitle });
   };
 
-    return (
+  return (
     <li className="bg-purple-950/40 border border-purple-800/40 rounded-xl p-3 my-2 shadow-sm">
       <form onSubmit={handleUpdate}>
         {isEditing ? (
@@ -70,12 +70,20 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
             >
               {todo.title}
             </span>
+
+            <button
+              type="button"
+              onClick={() => onDeleteTodo(todo.id)}
+              aria-label="Delete todo"
+              className="p-1 text-slate-200 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition cursor-pointer ml-auto"
+            >
+              Delete
+            </button>
           </div>
         )}
       </form>
     </li>
   );
-
 }
 
 export default TodoListItem;

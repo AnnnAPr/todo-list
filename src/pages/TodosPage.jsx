@@ -3,7 +3,7 @@ import TodoForm from "../features/Todos/TodoForm.jsx";
 import SortBy from "../shared/SortBy.jsx";
 import FilterInput from "../shared/FilterInput.jsx";
 import useDebounce from "../utils/useDebounce.js";
-import { useReducer, useEffect, useCallback } from "react";
+import { useState, useReducer, useEffect, useCallback } from "react";
 import {
   todoReducer,
   initialTodoState,
@@ -17,6 +17,7 @@ function TodosPage() {
   const { token, logout } = useAuth();
   const [searchParams] = useSearchParams();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+  const [userMessage, setUserMessage] = useState("");
 
   const statusFilter = searchParams.get("status") || "all";
 
@@ -60,6 +61,11 @@ function TodosPage() {
             type: TODO_ACTIONS.FETCH_SUCCESS,
             payload: tasks,
           });
+        } else if (response.status === 404) {
+          dispatch({
+            type: TODO_ACTIONS.FETCH_SUCCESS,
+            payload: [],
+          });
         } else if (response.status === 401) {
           await logout();
           throw new Error("unauthorized");
@@ -70,7 +76,7 @@ function TodosPage() {
         if (
           debouncedFilterTerm ||
           sortBy !== "createdAt" ||
-          sortDirection !== "asc"
+          sortDirection !== "desc"
         ) {
           dispatch({
             type: TODO_ACTIONS.FETCH_FILTER_ERROR,
@@ -199,6 +205,40 @@ function TodosPage() {
     dispatch({ type: TODO_ACTIONS.INVALIDATE_CACHE });
   }, []);
 
+  const deleteTodo = async (id) => {
+    dispatch({ type: TODO_ACTIONS.CLEAR_ERROR });
+    dispatch({ type: TODO_ACTIONS.DELETE_TODO_START, payload: id });
+
+    const originalTodo = todoList.find((todo) => todo.id === id);
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete todo");
+      }
+      dispatch({ type: TODO_ACTIONS.DELETE_TODO_SUCCESS, payload: id });
+    } catch (error) {
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: { message: error.message, originalTodo },
+      });
+    }
+  };
+
+  const isToolbarDisabled = todoList.length === 0 && !filterTerm;
+  const handleDisabledClick = () => {
+    if (isToolbarDisabled) {
+      setUserMessage("Please add a todo first!");
+      setTimeout(() => setUserMessage(""), 1500);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -236,6 +276,25 @@ function TodosPage() {
           </button>
         </div>
       )}
+
+      {userMessage && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-3.5 bg-purple-600 text-white text-sm font-bold rounded-2xl shadow-xl shadow-purple-950/50 border border-purple-400/40 whitespace-nowrap">
+          <svg
+            className="w-5 h-5 text-white shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{userMessage}</span>
+        </div>
+      )}
       <SortBy
         sortBy={sortBy}
         onSortByChange={(value) =>
@@ -251,17 +310,25 @@ function TodosPage() {
             payload: { sortDirection: value, sortBy },
           })
         }
+        disabled={isToolbarDisabled}
+        onDisabledClick={handleDisabledClick}
       />
-      <StatusFilter />
+      <StatusFilter
+        disabled={isToolbarDisabled}
+        onDisabledClick={handleDisabledClick}
+      />
       <FilterInput
         filterTerm={filterTerm}
         onFilterChange={handleFilterChange}
+        disabled={isToolbarDisabled}
+        onDisabledClick={handleDisabledClick}
       />
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        onDeleteTodo={deleteTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
       />

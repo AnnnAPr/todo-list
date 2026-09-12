@@ -1,7 +1,9 @@
 function AboutPage() {
   return (
     <div>
-      <h1 className="text-2xl sm:text-3xl font-bold text-purple-300 text-left mb-4">About</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-purple-300 text-left mb-4">
+        About
+      </h1>
       <p className="text-lg text-purple-100 font-medium leading-relaxed mb-6">
         TaskFlow is a personal task management app that helps you organize,
         track, and complete your daily to-dos. Create tasks, mark them as done,
@@ -11,7 +13,7 @@ function AboutPage() {
         <h2 className="text-lg font-semibold text-purple-300 mb-2">
           Technical Overview
         </h2>
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+        <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
           This application is a modern{" "}
           <span className="italic font-semibold text-white text-lg">
             Single Page Application (SPA)
@@ -20,15 +22,14 @@ function AboutPage() {
           <span className="italic font-semibold text-white text-lg">React</span>{" "}
           and powered by{" "}
           <span className="italic font-semibold text-white text-lg">Vite</span>{" "}
-          for an ultra-fast development and build experience. Seamless client-side
-          navigation is handled by{" "}
+          for an ultra-fast development and build experience. Seamless
+          client-side navigation is handled by{" "}
           <span className="italic font-semibold text-white text-lg">
             React Router
           </span>
           , allowing users to transition between views smoothly without full
           page reloads.
         </p>
-
       </section>
     </div>
   );
