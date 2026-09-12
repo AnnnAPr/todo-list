@@ -32,7 +32,7 @@ function Logoff() {
       <button
         onClick={handleLogoff}
         disabled={isLoggingOff}
-        className="px-3 py-1.5 bg-purple-900/40 hover:bg-red-900/60 border border-purple-700/50 hover:border-red-700/60 text-purple-200 hover:text-red-200 text-xs font-semibold rounded-lg shadow-sm transition cursor-pointer disabled:cursor-not-allowed"
+        className="px-3 py-1.5 bg-slate-900/80 hover:bg-rose-950/70 border border-slate-700/60 hover:border-rose-500/50 text-slate-300 hover:text-rose-300 text-xs font-semibold rounded-lg shadow-sm transition cursor-pointer disabled:cursor-not-allowed"
       >
         {isLoggingOff ? "Logging off..." : `Logout`}
       </button>

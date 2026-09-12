@@ -237,12 +237,12 @@ function TodosPage() {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
-        <h1 className="text-2xl sm:text-3xl font-bold text-purple-300 text-left">
+      <div className="flex items-center gap-3 mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-purple-400 text-left">
           My Todos
         </h1>
         <span
-          className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-900/60 text-purple-300 border border-purple-700/50 ${
+          className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-900 text-purple-400 border border-purple-600/40 ${
             isTodoListLoading ? "visible" : "invisible"
           }`}
         >
@@ -251,7 +251,7 @@ function TodosPage() {
       </div>
       {error && (
         <>
-          <p>{error}</p>
+          <p className="text-red-400">{error}</p>
           <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
             Clear Error
           </button>
@@ -259,7 +259,7 @@ function TodosPage() {
       )}
       {filterError && (
         <div>
-          <p>{filterError}</p>
+          <p className="text-red-400">{filterError}</p>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
           >
@@ -274,9 +274,9 @@ function TodosPage() {
       )}
 
       {userMessage && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-3.5 bg-purple-600 text-white text-sm font-bold rounded-2xl shadow-xl shadow-purple-950/50 border border-purple-400/40 whitespace-nowrap">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-3.5 bg-slate-900 text-purple-400 text-sm font-bold rounded-2xl shadow-xl shadow-slate-950/60 border border-purple-600/50 whitespace-nowrap">
           <svg
-            className="w-5 h-5 text-white shrink-0"
+            className="w-5 h-5 text-purple-400 shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -291,6 +291,7 @@ function TodosPage() {
           <span>{userMessage}</span>
         </div>
       )}
+
       <SortBy
         sortBy={sortBy}
         onSortByChange={(value) =>

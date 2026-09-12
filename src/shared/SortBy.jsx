@@ -16,7 +16,7 @@ function SortBy({
         <div className="flex items-center gap-2">
           <label
             htmlFor="sortBy"
-            className="text-sm font-medium text-purple-200"
+            className="text-sm font-medium text-purple-400"
           >
             Sort by:
           </label>
@@ -26,7 +26,7 @@ function SortBy({
             value={sortBy}
             disabled={disabled}
             onChange={(event) => onSortByChange(event.target.value)}
-            className={`bg-purple-950/70 border border-purple-700/60 text-purple-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`bg-slate-900/90 border border-slate-700/70 text-slate-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-600 ${
               disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"
             }`}
           >
@@ -37,7 +37,7 @@ function SortBy({
         <div className="flex items-center gap-2">
           <label
             htmlFor="order"
-            className="text-sm font-medium text-purple-200"
+            className="text-sm font-medium text-purple-400"
           >
             Order:
           </label>
@@ -47,7 +47,7 @@ function SortBy({
             value={sortDirection}
             disabled={disabled}
             onChange={(event) => onSortDirectionChange(event.target.value)}
-            className={`bg-purple-950/70 border border-purple-700/60 text-purple-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`bg-slate-900/90 border border-slate-700/70 text-slate-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-600 ${
               disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"
             }`}
           >

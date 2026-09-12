@@ -20,7 +20,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
   };
 
   return (
-    <li className="bg-purple-950/40 border border-purple-800/40 rounded-xl p-3 my-2 shadow-sm">
+    <li className="bg-slate-900/80 border border-slate-700/60 hover:border-purple-600/40 rounded-xl p-3 my-2 shadow-sm transition">
       <form onSubmit={handleUpdate}>
         {isEditing ? (
           <div className="flex flex-col sm:flex-row sm:items-end gap-3">
@@ -43,7 +43,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
                 type="button"
                 disabled={!isValidTodoTitle(workingTitle)}
                 onClick={handleUpdate}
-                className="px-3 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950/50 disabled:opacity-50 text-white text-xs font-semibold rounded-lg shadow transition cursor-pointer disabled:cursor-not-allowed whitespace-nowrap"
+                className="px-3 py-2 bg-purple-700 hover:bg-purple-600 disabled:bg-slate-800 disabled:opacity-50 text-white text-xs font-semibold rounded-lg shadow transition cursor-pointer disabled:cursor-not-allowed whitespace-nowrap"
               >
                 Update
               </button>
@@ -57,15 +57,15 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
                 id={`checkbox${todo.id}`}
                 checked={todo.isCompleted}
                 onChange={() => onCompleteTodo(todo.id)}
-                className="w-4 h-4 accent-purple-500 rounded cursor-pointer"
+                className="w-4 h-4 accent-purple-600 rounded cursor-pointer"
               />
             </label>
             <span
               onClick={startEditing}
               className={`flex-1 text-sm cursor-pointer transition ${
                 todo.isCompleted
-                  ? "line-through text-slate-400"
-                  : "text-purple-100 hover:text-purple-300"
+                  ? "line-through text-slate-500"
+                  : "text-slate-100 hover:text-purple-400"
               }`}
             >
               {todo.title}
@@ -75,7 +75,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
               type="button"
               onClick={() => onDeleteTodo(todo.id)}
               aria-label="Delete todo"
-              className="p-1 text-slate-200 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition cursor-pointer ml-auto"
+              className="p-1 text-slate-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition cursor-pointer ml-auto text-xs"
             >
               Delete
             </button>

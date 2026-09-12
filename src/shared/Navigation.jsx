@@ -2,7 +2,9 @@ import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 const navLinkClass = ({ isActive }) =>
-  isActive ? "font-bold underline" : "font-normal no-underline";
+  isActive
+    ? "font-bold text-purple-400 border-b-2 border-purple-400 pb-0.5 transition"
+    : "font-normal text-slate-300 hover:text-purple-400 no-underline transition";
 
 function Navigation() {
   const { isAuthenticated } = useAuth();

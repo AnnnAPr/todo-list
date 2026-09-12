@@ -59,47 +59,62 @@ function ProfilePage() {
 
   return (
     <div>
-      <h1 className="text-3xl sm:text-4xl font-bold text-purple-400 text-left mb-4">
+      <h1 className="text-3xl sm:text-4xl font-bold text-purple-400 text-left mb-6">
         Profile
       </h1>
 
-      <section className="mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">
+      <section className="mb-6 bg-slate-900/80 border border-slate-700/60 rounded-xl p-4 sm:p-5 shadow-md">
+        <h2 className="text-xl font-semibold italic text-purple-400 mb-3">
           User Information
         </h2>
-        <ul className="list-none p-0 space-y-1 text-sm text-purple-100">
+        <ul className="list-none p-0 space-y-1.5 text-sm text-slate-200">
           <li>
-            <strong className="text-purple-300">Email:</strong> {email}
+            <strong className="text-purple-400">Email:</strong> {email}
           </li>
           <li>
-            <strong className="text-purple-300">Status:</strong>{" "}
-            {token ? "Active" : "Inactive"}
+            <strong className="text-purple-400">Status:</strong>{" "}
+            <span className="text-emerald-400 font-medium">
+              {token ? "Active" : "Inactive"}
+            </span>
           </li>
         </ul>
       </section>
 
-      <section>
-        <h2 className="text-xl sm:text-2xl font-semibold italic text-purple-300 mb-3">
+      <section className="bg-slate-900/80 border border-slate-700/60 rounded-xl p-4 sm:p-5 shadow-md">
+        <h2 className="text-xl font-semibold italic text-purple-400 mb-3">
           Todo Statistics
         </h2>
-        {loading && <p>Loading statistics...</p>}
+        {loading && (
+          <p className="text-slate-400 text-sm">Loading statistics...</p>
+        )}
         {error && <p className="text-red-400 text-sm">{error}</p>}
         {!loading && !error && (
-          <ul>
+          <ul className="space-y-1.5 text-sm text-slate-200">
             <li>
-              <span className="italic font-semibold">Total:</span> {stats.total}
+              <span className="italic font-semibold text-purple-400">
+                Total:
+              </span>{" "}
+              {stats.total}
             </li>
             <li>
-              <span className="italic font-semibold">Completed:</span>{" "}
+              <span className="italic font-semibold text-purple-400">
+                Completed:
+              </span>{" "}
               {stats.completed}
             </li>
             <li>
-              <span className="italic font-semibold">Active:</span>{" "}
+              <span className="italic font-semibold text-purple-400">
+                Active:
+              </span>{" "}
               {stats.active}
             </li>
             <li>
-              <span className="italic font-semibold">Completion:</span>{" "}
-              {completionPercentage}%
+              <span className="italic font-semibold text-purple-400">
+                Completion:
+              </span>{" "}
+              <span className="text-purple-400 font-bold">
+                {completionPercentage}%
+              </span>
             </li>
           </ul>
         )}

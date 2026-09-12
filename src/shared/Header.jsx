@@ -11,7 +11,7 @@ function Header() {
           <Logoff />
         </div>
       )}
-      <h1 className="text-4xl sm:text-6xl font-extrabold text-[#e07cf3] text-center tracking-tight">
+      <h1 className="text-4xl sm:text-6xl font-extrabold text-purple-400 text-center tracking-tight">
         Todo List
       </h1>
       <Navigation />

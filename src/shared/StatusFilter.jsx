@@ -23,7 +23,7 @@ function StatusFilter({ disabled = false, onDisabledClick }) {
       <div className="flex items-center gap-2">
         <label
           htmlFor="statusFilter"
-          className="text-sm font-medium text-purple-200"
+          className="text-sm font-medium text-purple-400"
         >
           Show:
         </label>
@@ -32,7 +32,7 @@ function StatusFilter({ disabled = false, onDisabledClick }) {
           value={currentStatus}
           disabled={disabled}
           onChange={(e) => handleStatusChange(e.target.value)}
-          className={`bg-purple-950/70 border border-purple-700/60 text-purple-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`bg-slate-900/90 border border-slate-700/70 text-slate-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-600 ${
             disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"
           }`}
         >

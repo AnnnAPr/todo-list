@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="min-h-screen text-slate-100 flex flex-col items-center px-4 py-6">
       <Header />
-      <main className="w-full max-w-sm sm:max-w-xl md:max-w-2xl bg-purple-900/40 backdrop-blur-md border border-purple-700/40 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl mt-6">
+      <main className="w-full max-w-sm sm:max-w-xl md:max-w-2xl bg-slate-800/80 backdrop-blur-md border border-purple-600/30 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-slate-950/50 mt-6">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />

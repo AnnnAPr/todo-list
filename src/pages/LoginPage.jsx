@@ -45,9 +45,9 @@ function LoginPage() {
 
   return (
     <>
-      {authError && <p>{authError}</p>}
+      {authError && <p className="text-red-400 text-sm mb-3">{authError}</p>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <label htmlFor="email" className="text-sm text-purple-200">
+        <label htmlFor="email" className="text-sm text-purple-400">
           Email:
         </label>
         <input
@@ -56,9 +56,9 @@ function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="bg-purple-950/60 border border-purple-700/60 text-purple-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="bg-slate-900/80 border border-slate-700/70 text-slate-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
-        <label htmlFor="password" className="text-sm text-purple-200">
+        <label htmlFor="password" className="text-sm text-purple-400">
           Password:
         </label>
         <input
@@ -67,12 +67,12 @@ function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="bg-purple-950/60 border border-purple-700/60 text-purple-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="bg-slate-900/80 border border-slate-700/70 text-slate-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
         <button
           type="submit"
           disabled={isLoggingOn}
-          className="mt-3 py-2.5 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-900/50 text-white font-semibold rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed"
+          className="mt-3 py-2.5 bg-purple-700 hover:bg-purple-600 disabled:bg-slate-800 text-white font-semibold rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed"
         >
           {isLoggingOn ? "Logging in..." : "Log On"}
         </button>

@@ -25,7 +25,7 @@ function TodoForm({ onAddTodo }) {
       <button
         type="submit"
         disabled={!isValidTodoTitle(workingTodoTitle)}
-        className="px-4 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950/50 disabled:opacity-50 text-white text-sm font-semibold rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed whitespace-nowrap"
+        className="px-4 py-2 bg-purple-700 hover:bg-purple-600 disabled:bg-slate-800 disabled:opacity-50 text-white text-sm font-semibold rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed whitespace-nowrap"
       >
         Add Todo
       </button>
