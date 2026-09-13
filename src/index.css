@@ -12,3 +12,27 @@ body {
     Roboto,
     sans-serif;
 }
+
+select {
+  color-scheme: dark;
+}
+
+select option {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+select option:checked {
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+select option:hover,
+select option:focus,
+select option:active {
+  background-color: #7e22ce !important;
+  color: #ffffff !important;
+}
+
+
+
