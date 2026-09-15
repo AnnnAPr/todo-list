@@ -140,6 +140,39 @@ The active/completed filter state lives in the URL as a `?status=` query paramet
 
 ---
 
+## 📝 Style Documentation
+
+### Code Style
+
+The project uses **ESLint** with the React Hooks plugin for linting. All code is written as **ES Modules** with `.jsx` extensions for React components. Components are **functional with hooks** — no class components. File names follow **PascalCase** (e.g., `TodoForm.jsx`), while variables, functions, and hooks use **camelCase**. Styles are **colocated** with components via Tailwind CSS utility classes directly in JSX.
+
+### Component Structure
+
+```
+src/
+├── components/          # Shared UI components
+├── contexts/            # React Context providers
+├── features/            # Feature-based modules (Todos/)
+│   └── Todos/
+│       ├── TodoList/    # Todo list components
+│       └── TodoForm.jsx # Add todo form
+├── hooks/               # Custom React hooks
+├── pages/               # Route-level page components
+├── reducers/            # useReducer state logic
+├── shared/              # Shared/reusable components
+└── utils/               # Utility functions (validation, etc.)
+```
+
+### Styling Approach
+
+**Tailwind CSS v4** provides a utility-first workflow. The app uses a **dark purple theme** with frosted-glass cards for a sleek, modern feel. Layouts are **mobile-first** with responsive breakpoints (`sm:`, `md:`, `lg:`). Interactive elements have **smooth transitions** on hover/focus. There are **no custom CSS files** — all styling lives in JSX via Tailwind utilities.
+
+### State Management Patterns
+
+Complex local state (todos, filters, sorting) lives in **`useReducer`** for explicit, predictable transitions. Global auth state uses the **Context API**. **Optimistic updates** give immediate UI feedback with automatic rollback on server errors. Filter state lives in the **URL as query parameters** (`?status=active`), making it shareable and persistent across refreshes.
+
+---
+
 ## 🔮 Future Improvements
 
 - **Due Dates & Reminders** — Add optional due dates with browser notifications
