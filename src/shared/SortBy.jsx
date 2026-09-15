@@ -9,9 +9,9 @@ function SortBy({
   return (
     <div className="flex flex-wrap items-center gap-3">
       <div
-        onClick={() => disabled && onDisabledClick?.()}
         className={`flex flex-wrap items-center gap-3 ${disabled ? "cursor-not-allowed" : ""}`}
         title={disabled ? "No todos available to sort" : ""}
+        onClick={disabled ? onDisabledClick : undefined}
       >
         <div className="flex items-center gap-2">
           <label

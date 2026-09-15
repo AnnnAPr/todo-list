@@ -83,7 +83,11 @@ function ProfilePage() {
           Todo Statistics
         </h2>
         {loading && <p>Loading statistics...</p>}
-        {error && <p className="text-red-400 text-sm">{error}</p>}
+        {error && (
+          <div className="mb-4 p-3 bg-red-950/40 border border-red-800/40 rounded-xl text-red-200 text-sm">
+            {error}
+          </div>
+        )}
         {!loading && !error && (
           <ul>
             <li>
