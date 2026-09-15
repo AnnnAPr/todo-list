@@ -258,7 +258,7 @@ function TodosPage() {
           <span>{error}</span>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
-            className="px-3 py-1 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition cursor-pointer whitespace-nowrap flex-shrink-0"
+            className="px-3 py-1 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition cursor-pointer whitespace-nowrap flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             Clear Error
           </button>
@@ -269,14 +269,16 @@ function TodosPage() {
           <p className="mb-2">{filterError}</p>
           <div className="flex gap-2 flex-wrap">
             <button
-              onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
-              className="px-3 py-1 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition cursor-pointer"
+              onClick={() =>
+                dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
+              }
+              className="px-3 py-1 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               Clear Filter Error
             </button>
             <button
               onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
-              className="px-3 py-1 bg-purple-900/40 hover:bg-purple-800/60 border border-purple-700/50 text-purple-200 hover:text-purple-100 text-xs font-semibold rounded-lg transition cursor-pointer"
+              className="px-3 py-1 bg-purple-900/40 hover:bg-purple-800/60 border border-purple-700/50 text-purple-200 hover:text-purple-100 text-xs font-semibold rounded-lg transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               Reset Filters
             </button>

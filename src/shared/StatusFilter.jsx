@@ -16,7 +16,6 @@ function StatusFilter({ disabled = false, onDisabledClick }) {
 
   return (
     <div
-      onClick={() => disabled && onDisabledClick?.()}
       className={`inline-block ${disabled ? "cursor-not-allowed" : ""}`}
       title={disabled ? "No todos available to filter" : ""}
     >
