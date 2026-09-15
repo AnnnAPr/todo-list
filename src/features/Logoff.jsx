@@ -27,8 +27,12 @@ function Logoff() {
   };
 
   return (
-    <div className="flex items-center">
-      {authError && <p className="text-red-400 text-xs mr-2">{authError}</p>}
+    <div className="flex items-center gap-2">
+      {authError && (
+        <div className="px-3 py-1.5 bg-red-950/40 border border-red-800/40 rounded-lg text-red-200 text-xs">
+          {authError}
+        </div>
+      )}
       <button
         onClick={handleLogoff}
         disabled={isLoggingOff}

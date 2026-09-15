@@ -64,7 +64,11 @@ const validatePassword = (value) => {
 
   return (
     <>
-      {authError && <p>{authError}</p>}
+      {authError && (
+        <div className="mb-4 p-3 bg-red-950/40 border border-red-800/40 rounded-xl text-red-200 text-sm">
+          {authError}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <label htmlFor="email" className="text-sm text-purple-200">
           Email:
@@ -82,7 +86,7 @@ const validatePassword = (value) => {
           maxLength={EMAIL_MAX_LENGTH}
           className="bg-purple-950/60 border border-purple-700/60 text-purple-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        {emailError && <span className="text-red-400 text-xs mt-1 block">{emailError}</span>}
+        {emailError && <p className="text-red-400 text-xs mt-1">{emailError}</p>}
         <label htmlFor="password" className="text-sm text-purple-200">
           Password:
         </label>
@@ -99,7 +103,7 @@ const validatePassword = (value) => {
           maxLength={PASSWORD_MAX_LENGTH}
           className="bg-purple-950/60 border border-purple-700/60 text-purple-100 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        {passwordError && <span className="text-red-400 text-xs mt-1 block">{passwordError}</span>}
+        {passwordError && <p className="text-red-400 text-xs mt-1">{passwordError}</p>}
         <button
           type="submit"
           disabled={isLoggingOn || emailError || passwordError}
