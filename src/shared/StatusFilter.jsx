@@ -18,6 +18,7 @@ function StatusFilter({ disabled = false, onDisabledClick }) {
     <div
       className={`inline-block ${disabled ? "cursor-not-allowed" : ""}`}
       title={disabled ? "No todos available to filter" : ""}
+      onClick={disabled ? onDisabledClick : undefined}
     >
       <div className="flex items-center gap-2">
         <label

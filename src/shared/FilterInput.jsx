@@ -5,7 +5,10 @@ function FilterInput({
   onDisabledClick,
 }) {
   return (
-    <div className="flex items-end gap-3 my-3">
+    <div
+      className="flex items-end gap-3 my-3"
+      onClick={disabled ? onDisabledClick : undefined}
+    >
       <div className="flex flex-col gap-1.5 flex-1">
         <label
           htmlFor="filterInput"
