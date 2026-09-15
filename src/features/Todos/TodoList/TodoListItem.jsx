@@ -1,5 +1,5 @@
 import TextInputWithLabel from "../../../shared/TextInputWithLabel.jsx";
-import { isValidTodoTitle } from "../../../utils/todoValidation.js";
+import { isValidTodoTitle, getTodoTitleError, TODO_TITLE_MAX_LENGTH } from "../../../utils/todoValidation.js";
 import { useEditableTitle } from "../../../hooks/useEditableTitle.js";
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
@@ -11,6 +11,8 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
     updateTitle,
     finishEdit,
   } = useEditableTitle(todo.title);
+
+  const error = getTodoTitleError(workingTitle);
 
   const handleUpdate = (event) => {
     if (!isEditing) return;
@@ -29,6 +31,8 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
               labelText="Edit Todo"
               value={workingTitle}
               onChange={(event) => updateTitle(event.target.value)}
+              maxLength={TODO_TITLE_MAX_LENGTH}
+              error={error}
             />
             {/* Button Container with Gap */}
             <div className="flex items-center gap-2">

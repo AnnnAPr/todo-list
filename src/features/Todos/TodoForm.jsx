@@ -1,14 +1,15 @@
 import { useState, useRef } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel.jsx";
-import { isValidTodoTitle } from "../../utils/todoValidation.js";
+import { isValidTodoTitle, getTodoTitleError, TODO_TITLE_MAX_LENGTH } from "../../utils/todoValidation.js";
 
 function TodoForm({ onAddTodo }) {
   const [workingTodoTitle, setWorkingTodoTitle] = useState("");
   const inputRef = useRef(null);
+  const error = getTodoTitleError(workingTodoTitle);
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-
+    if (error) return;
     onAddTodo(workingTodoTitle);
     setWorkingTodoTitle("");
   };
@@ -21,6 +22,8 @@ function TodoForm({ onAddTodo }) {
         value={workingTodoTitle}
         onChange={(event) => setWorkingTodoTitle(event.target.value)}
         ref={inputRef}
+        maxLength={TODO_TITLE_MAX_LENGTH}
+        error={error}
       />
       <button
         type="submit"
